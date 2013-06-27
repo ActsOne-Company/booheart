@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booHeart</title>
+<link rel="stylesheet" href="css/booheart-theme.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile.structure-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/ko_KR/all.js', function(){
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '392391277518643',
+        channelUrl: '//dev.actsone.co.kr/booheart/channel.html',
+		status     : true,            // Check Facebook Login status
+        xfbml      : true,
+		cookie	: true
+      });       
+      //$('#loginbutton').removeAttr('disabled');
+	  //$('#loginButton').hide();
+      FB.getLoginStatus(checkLoginStatus);
+    };
+  });
+
+});
+
+function authUser() {
+        FB.login(checkLoginStatus, {scope:'publish_stream, email, user_birthday, user_status, publish_actions'});
+}
+      
+      // Check the result of the user status and display login button if necessary
+function checkLoginStatus(response) {
+	
+	var accessToken = response.authResponse.accessToken;
+    var userId, userName, fbId, userBirth;
+     
+        if(response && response.status == 'connected') {
+          	alert('User is authorized');
+    		FB.api('/me', function(user) {
+             
+        		userId = user.email;
+        		userName = user.name;
+        		fbId = user.id;
+        		userBirth = user.birthday;
+				//alert(userId + ',' + userName + ', ' + fbId + ', ' + userBirth);
+			});
+            
+          // Hide the login button
+		  //alert('login: ' + $('#loginButton').val());
+		  $('#loginButton').hide();
+          //document.getElementById('loginButton').style.display = 'none';
+          
+          // Now Personalize the User Experience
+          console.log('Access Token: ' + response.authResponse.accessToken);
+        } else if (response.status === 'not_authorized') {
+          alert('User is not authorized');
+          $('#loginButton').show();
+          // Display the login button
+          //document.getElementById('loginButton').style.display = 'block';
+        } else {
+			// the user isn't logged in to Facebook.
+          $('#loginButton').show();
+		  alert('User is not logged in to Facebook');
+		}
+}
+</script>
+<body>
+<div data-role="page" data-theme="b" id="page1">
+	<div data-role="header" data-theme="b" data-position="inline">
+		<h1>booHeart</h1>
+	</div>
+	<div id="fb-root"></div>
+    <div data-role="content" data-theme="b" align="center">
+    	<div class="ui-grid-b">
+          <div class="ui-block-a" style="width:30%;"></div>
+          <div class="ui-block-b" style="width:40%;">
+    		<div id="loginButton" data-role="button" data-theme="b" onClick="authUser();">Login with Facebook</div>
+          </div>
+          <div class="ui-block-c" style="width:30%;"></div>
+        </div>
+    	<div class="ui-grid-b">
+          <div class="ui-block-a" style="width:20%;" ></div>
+          <div class="ui-block-b" style="width:60%;">
+          	<label style="font-size:small">귀하의 허락없이 담벼락에 게시하지 않습니다.</label>
+          </div>
+          <div class="ui-block-c" style="width:20%;"></div>
+        </div>
+    	<div class="ui-grid-b">
+          <div class="ui-block-a" style="width:30%;"></div>
+          <div class="ui-block-b" style="width:40%;">
+    	    <div id="loginButton" data-role="button" data-theme="b" onClick="alert('이메일로 등록');">이메일로 등록</div>
+          </div>
+          <div class="ui-block-c" style="width:30%;"></div>
+        </div>
+    	<div class="ui-grid-b">
+          <div class="ui-block-a" style="width:30%;"></div>
+          <div class="ui-block-b" style="width:40%;">
+    	    <div id="loginButton" data-role="button" data-theme="b" onClick="alert('로그인 페이지 이동 준비중');">로그인</div>
+          </div>
+          <div class="ui-block-c" style="width:30%;"></div>
+        </div>
+    </div>
+    <div data-theme="b" data-role="footer" data-position="fixed">
+        <h3>
+            Footer
+        </h3>
+    </div>
+        
+</body>
+</html>

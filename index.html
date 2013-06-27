@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booHeart</title>
+<link rel="stylesheet" href="css/booheart-theme.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile.structure-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+</script>
+</head>
+
+<body>
+
+<!-- Home -->
+<div data-role="page" data-theme="b" id="page1">
+	<div data-role="header" data-theme="b" data-position="inline">
+		<h1>booHeart</h1>
+	</div>
+    <div data-role="content" data-theme="b">
+        <div style=" text-align:center" id="barcode_img">
+            <img id="barcode_img" alt="TESTING" src="/booheart/barcode_gen/barcode.php?codetype=Code128&size=50&text=123456789">
+        </div>
+        <div align="center">
+        	<h4>123456789</h4>
+        </div>
+        <div align="center">
+            <h3>BooHeart Membership ID</h3>
+            <label id="IdDesc">(커피매장 직원에게 ID를 보여 주세요)</label>
+        </div>
+        <div align="right">
+        	<br>
+            <h3>08시 기준 나눔지수=150.35원</h3>
+        </div>
+        <div id="nanumInfo" align="left">
+            여러분이 많이 참여하실수록 나눔지수는 올라가서 더 많이 기부합니다.
+        </div>
+        <div id="coffee1" class="ui-grid-d">
+          <div class="ui-block-a">
+            <img src="/booheart/images/coffee-icon-full.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-b">
+            <img src="/booheart/images/coffee-icon-full.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-c">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-d">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-e">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+        </div>
+        <div id="coffee1" class="ui-grid-d">
+          <div class="ui-block-a">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-b">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-c">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-d">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+          <div class="ui-block-e">
+            <img src="/booheart/images/coffee-icon-empty.png" alt="착한나눔" style="width:60px; height:60px;">
+          </div>
+        </div>
+    </div>
+    <div data-theme="b" data-role="footer" data-position="fixed">
+        <h3>
+            Footer
+        </h3>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta name="copyright" content="&copy; 2013, . All rights reserved." />
+
+    <!-- stylesheets -->
+    <!-- note: use jquery.mobile-1.1.1.min.css for production -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+<!--    <link rel="shortcut icon" href="http://vandelaydesign.com/favicon.ico"/>
+    <link rel="icon" href="http://vandelaydesign.com/favicon.ico"/>-->
+
+    <link rel="stylesheet" type="text/css" href="css/donation.css"/>
+	<link rel="stylesheet" type="text/css" href="css/booheart-theme.min.css"/>
+
+    <!-- scripts -->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<!--<script type="text/javascript" src="../mustache.js" ></script>-->
+    <script type="text/javascript" src="js/donation.js"></script>
+    
+    <!-- title of app -->
+    <title>booheart 기부 페이지</title>
+    
+    <!-- mobile layout sized appropriately to viewport width and not zoomable -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+</head>
+
+<body>
+    
+    <!-- initial page to obtain developer key -->
+    <div data-role="page" id="indexPage" data-theme="c">
+
+		<!--<div data-role="panel" id="optionPanel" data-position="right" data-display="overlay">
+			<a href="#my-header" data-rel="close">Close panel</a>
+		</div>-->
+        <!-- header button to display information dialog page #aboutMsg -->
+		<div data-role="header" data-theme="b" data-position="fixed">
+		    <h1>booheart 기부처 보기</h1>
+		    <a href="#optionPanel" " data-role="button" data-rel="panel" data-icon="gear" class="ui-btn-right">Options</a>
+			<div data-role="navbar">
+			<ul>
+				<li><a href="#">기부리스트</a></li>
+				<li><a href="#">지난기부한곳</a></li>
+				<li><a href="#">포인트현황</a></li>
+			</ul>
+			</div><!-- /navbar -->
+		</div><!-- /header -->
+        <div data-role="content">
+		    <div align="right" data-theme="d">
+				<a href="#" id="gridview" class="switcher" data-mini="true"><img id="gridimg" src="images/grid-view.png" alt="Grid"></a>
+				<a href="#" id="listview" class="switcher active"><img id="listimg"  src="images/list-view-active.png" alt="List"></a>
+		    </div>
+
+		<ul id="products" class="list clearfix">
+			<!-- row 1 -->
+			<li class="clearfix">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 2 -->
+			<li class="clearfix alt">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 3 -->
+			<li class="clearfix third">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 4 -->
+			<li class="clearfix alt">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 5 -->
+			<li class="clearfix">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 6 -->
+			<li class="clearfix alt third">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 7 -->
+			<li class="clearfix">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 8 -->
+			<li class="clearfix alt">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+			
+			<!-- row 9 -->
+			<li class="clearfix third">
+				<section class="left">
+					<h3>사랑 고아원 구호물품 기부</h3>
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<span class="meta">12/00일 10:00 홍대입구<br>현재 oo명 참여</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">500만원<br>(20% 기부목표)</span>
+					<span class="darkview">
+					<a href="#aboutMsg" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:alert('기부되었습니다.');"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+		</ul>
+
+        </div>
+    </div>
+
+    <div data-role="dialog" id="aboutMsg">
+        <div data-role="header" data-theme="d">
+            <h1>About</h1>
+        </div>
+        <div data-role="content" data-theme="c">
+            <p>이번 기부 행사의 목적은.....</p>
+            <a href="#" data-role="button" data-mini="true" data-rel="back" data-theme="b">OK</a>       
+        </div>
+    </div>
+
+
+    <!-- skeletons for primary pages to be created upon application initialization -->
+    <!-- content of each to be filled on demand during page navigation             -->
+    
+    
+    <!-- template for content of primary pages -->
+    <script type="text/html" id="primaryPageListViewTmpl">
+        <ul data-role="listview" class="movies">
+            <!-- mustache section -->
+            {{#.}}
+                <!-- template for each item in given json data -->
+                <li><a href="#secondaryPage" class="movie">
+                    <!-- movie thumbnail image -->
+                    <img src={{posters.thumbnail}} />
+                    <!--title of the movie -->
+                    <h3>{{title}}</h3>
+                    <!-- Rotten Tomatoes critics rating, numeric along with corresponding icon -->
+                    <p>
+                        TOMATOMETER<sup>&reg;</sup> {{ratings.critics_score}}
+                        <i class="icon tiny {{&ratings.critics_rating}}"></i>
+                    </p>
+                </a></li>
+            {{/.}}
+        </ul>
+    </script>
+
+    <script type="text/html" id="primaryPageGridViewTmpl">/*
+  		<ul id="products" class="list clearfix">
+			<!-- row 1 -->
+			<li class="clearfix">
+				<section class="left">
+					<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+					<h3>Product Name</h3>
+					<span class="meta">Product ID: 543J423</span>
+				</section>
+				
+				<section class="right">
+					<span class="price">$45.00</span>
+					<span class="darkview">
+					<a href="javascript:void(0);" class="firstbtn"><img src="images/read-more-btn.png" alt="Read More..."></a>
+					<a href="javascript:void(0);"><img src="images/add-to-cart-btn.png" alt="Add to Cart"></a>
+					</span>
+				</section>
+			</li>
+		</ul>*/
+    </script>
+
+    <!-- single copy of secondary page skeleton, content and title to be filled on demand -->    
+    <div data-role="page" id="secondaryPage">
+        
+        <!-- header -->
+        <div data-role="header" data-id="app-header">
+            <h1 id="title"></h1>
+            <a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left"></a>
+        </div>
+        
+        <!-- content -->
+        <div data-role="content">
+        </div>
+        
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed">
+        </div>
+        
+    </div>
+    
+    <!-- template for content of secondary pages -->
+    <script type="text/html" id="secondaryPageContentTmpl">
+        <!-- basic movie info highlighted at the top -->
+        <div class="highlight-container">
+            <!-- age-appropriateness rating and runtime in minutes -->
+            <div class="highlight-heading">
+                {{mpaa_rating}}, {{runtime}} minutes
+            </div>
+            <!-- first two cast memebers -->
+            <div class="highlight-details">
+                {{abridged_cast.0.name}}, {{abridged_cast.1.name}}
+            </div>
+            <!-- Rotten Tomatoes critics rating -->
+            <div class="highlight-rating">
+                <!-- numeric rating with corresponding icon -->
+                <div>
+                    <i class="icon small {{&ratings.critics_rating}}"></i> 
+                    {{ratings.critics_score}}
+                </div>
+                <!-- corresponding Tomatometer bar, to be filled with appropriate color and length based on actual rating -->
+                <div>
+                    <div class="tomatometer {{&ratings.critics_rating}}">
+                        <span style="width: {{&ratings.critics_score}};"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- synopsis of the movie -->
+        <p class="synopsis">{{synopsis}}</p>
+    </script>
+    
+</body>
+
+</html>

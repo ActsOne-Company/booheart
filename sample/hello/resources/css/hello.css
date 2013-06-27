@@ -1,0 +1,100 @@
+/**
+ * Appcropolis Template: hello 
+ * @copy Appcropolis LLC (c) 2011-2013. All rights reserved.
+ * @author tskim (support@appcropolis.com)
+ * @date 2013-06-07
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
+ *
+ * License and legal information: 
+ *
+ * http://appcropolis.com/license/
+ * http://appcropolis.com/legal/
+ * http://appcropolis.com/privacy/
+ */
+
+
+/* global */
+
+
+
+/* header */
+
+
+
+/* subheader */
+/* (subheader) seed-subheader */
+#hello div.subheader {
+	/* (subheader) */
+	}
+
+
+
+/* content */
+/* part: content */
+#hello div[data-role="content"] {
+	/* some rules */
+	}
+
+
+/* footer */
+/* part: footer */
+#hello div[data-role="footer"] {
+	}
+
+
+#hello div[data-role="footer"] .ui-btn {
+	border: 0 none;
+	background: transparent;
+	}
+	
+
+#hello div[data-role="footer"] .ui-btn-active {
+  	background: none rgba(255,255,255,0.14);
+  	-webkit-border-radius: 4px !important; -moz-border-radius: 4px !important; border-radius: 4px !important;
+	background: -webkit-gradient(linear, left top, left bottom, 
+   	color-stop(0%,  rgba(255,255,255,.1)),
+   	color-stop(50%,  rgba(255,255,255,.12)),
+   	color-stop(52%,  rgba(255,255,255,.05)),
+   	color-stop(100%,  rgba(255,255,255,.00)));
+	}
+		
+		
+#hello div[data-role="footer"] .ui-btn-inner {
+	border-color: #434343;
+	padding-top: 30px;
+	padding-bottom: 1px;
+	}
+#hello div[data-role="footer"] .ui-btn-text {
+	font-size: 11px;
+	text-shadow: 0 none;
+	}
+
+
+#hello div[data-role="footer"] [class^="ui-icon-"],
+#hello div[data-role="footer"] [class*=" ui-icon-"] {
+	background-color: transparent;
+	background-image: none;
+	border: none;
+	box-shadow: none;
+	left: 0px;
+	margin-left: 0px;
+	width: 100%;
+	}
+    
+    
+/* active-state */
+#hello div[data-role="footer"] .ui-btn-active .ui-icon-doc, 
+#hello div[data-role="footer"] .ui-btn-active .ui-icon-export, 
+#hello div[data-role="footer"] .ui-btn-active .ui-icon-basket {
+	color: rgba(135,224,253, 1);
+	text-shadow: 0px 1px 2px rgba(0,0,0,.5);
+	}
+

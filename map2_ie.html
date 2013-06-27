@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booheart 매장 찾기</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+<link href="css/styles.css" rel="stylesheet" />
+<link href="css/booheart-theme.min.css" rel="stylesheet" />
+
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+<script type="text/javascript" src="/booheart/js/jquery.ui.map.js"></script>
+<script type="text/javascript" src="/booheart/js/jquery.ui.map.overlays.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+Number.prototype.toRad = function() 
+{ 
+    return this * Math.PI / 180;
+}
+	// 초기 맵 위치 값 (Geolocation 또는 사용자 설정 값에 의해서 변경)
+	// 현재 37.497231, 127.027352 값은 강남역 사거리
+	var baseLat = 37.497231;
+	var baseLot = 127.027352;
+	var baseRadius = 2000; // 검색 범위 (m) 설정 (2Km)
+
+$(document).ready(function() {
+	$('#map_canvas').height('100%');
+	$('#map_canvas').width('100%');
+	//alert("path: " + window.location.href);
+
+	$.distanceFromCurrent = function(orgLat, orgLon, newLat, newLon) {
+		var R = 6371;  // Radius of the earch in Km
+		var dLat = (newLat - orgLat).toRad();
+		var dLon = (newLon - orgLon).toRad();
+		
+		orgLat = orgLat.toRad();          //conversion to radians
+    	newLat = newLat.toRad();
+
+    	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(orgLat) * Math.cos(newLat);
+    	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));   //must use atan2 as simple arctan cannot differentiate 1/1 and -1/-1
+    	var distance = R * c;   //sets the distance
+
+    	distance = Math.round(distance*10)/10;      //rounds number to closest 0.1 km
+		
+    	return distance;    //returns the distance
+	}
+	//$('#map_canvas').gmap('destroy');
+	
+});
+
+function getData() {
+	$.ajax({
+  		url:'http://localhost/booheart/json/demo1.json',
+  		type:"GET",
+  		contentType:"application/json; charset=unicode",
+  		dataType:"json",
+  		success: function(data){
+			alert("success..");
+   			$.each( data.markers, function(i, marker) {
+				markersData = data.markers;
+				$('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(marker.latitude, marker.longitude), 'bounds':true } ).click(function() {
+					$('#map_canvas').gmap('openInfoWindow', { 'content': marker.content }, this);
+				});
+			});
+  		}
+	}).fail(function() { alert("error"); });
+	
+}
+
+$(document).on("pageshow", '#index', function() {
+     	$('#map_canvas').gmap('refresh');
+});
+
+$(document).on('pageinit', '#index',function(e,data){  
+	//var pageinitPosition = "37.497231,127.027352";
+	var markersData;
+	
+	//$('#map_canvas').height('100%');  
+	//$('#map_canvas').width('100%');
+	
+	//최초 맵 로딩시 baseLat, baseLot 중앙 좌표를 기준으로 지도를 표시해줌.
+	//$('#map_canvas').gmap({ 'center': pageinitPosition, 'zoom': 16, 'minZoom':10});
+	var latLng = new google.maps.LatLng(baseLat, baseLot);
+	$('#map_canvas').gmap({ 'center': latLng, 'zoom': 16, 'minZoom':10});	
+	
+	$('#map_canvas').gmap().bind('init', function(evt, map) { 
+	//alert("pass1..");
+	
+		$.ajaxSetup({ scriptCharset: "utf-8" , contentType: "application/json; charset=utf-8"});
+		// 위치 정보 가지고 있는 값 가져오기.
+		$.getJSON('/booheart/json/demo.json', function(data) {
+			$.each( data.markers, function(i, marker) {
+				markersData = data.markers;
+				$('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(marker.latitude, marker.longitude), 'bounds':true } ).click(function() {
+					$('#map_canvas').gmap('openInfoWindow', { 'content': marker.content }, this);
+				});
+			});
+		})
+		.fail(function() {
+			alert("fail..");
+		});
+		// Circle 객체를 중앙에 그림.
+		$('#map_canvas').gmap('addShape', 'Circle', { 'strokeColor': "#FF0000", 'strokeOpacity': 0.8, 'strokeWeight': 2, 'fillColor': "#FF0000", 'fillOpacity': 0.1, 'center': new google.maps.LatLng(baseLat, baseLot), 'radius': baseRadius });
+		
+		//var distance = $.distanceFromCurrent(37.497231, 127.027352, 37.484666, 127.016838);
+		
+	});
+	//
+
+	// 현재 center 위치 값 가져오기 (목적 : 현재 위치에서 몇km 가까운 매장 찾기 기능 사용)
+	$($('#map_canvas').gmap('get', 'map')).dragend(function() { 
+	
+		// 바뀐 중앙 위치 좌표 가져오기
+		var clat = $('#map_canvas').gmap('get', 'map').getCenter().lat();
+		var clng = $('#map_canvas').gmap('get', 'map').getCenter().lng();
+				
+		// circle 표시 지움
+		$('#map_canvas').gmap('get', 'overlays > Circle')[0].setMap(null); 
+		
+		// 현재 위치 정보 map 오브젝트에 가져옴.
+		map = $("#map_canvas").gmap("get", "map");
+		
+		// 현재 위치의 중앙 좌표 값 (lat, lng) 가져옴.
+		clat = $('#map_canvas').gmap('get', 'map').getCenter().lat();
+		clng = $('#map_canvas').gmap('get', 'map').getCenter().lng();
+		
+		//alert("latLng: " + latLng + ", "+ clat + ", " + clng);
+		// 현재 중앙 위치에 다시 Circle 위한 옵션 값 설정
+		$('#map_canvas').gmap('get', 'overlays > Circle')[0].setOptions({'strokeColor': "#FF0000", 'strokeOpacity': 0.8, 'strokeWeight': 2, 'fillColor': "#FF0000", 'fillOpacity': 0.1, 'center': new google.maps.LatLng(clat, clng), 'radius': baseRadius });
+		// 옵션 값에 설정된 곳에 circle 다시 그림.
+		$('#map_canvas').gmap('get', 'overlays > Circle')[0].setMap(map); 
+		
+		mData = jQuery.grep(markersData, function(item){
+			if ((baseRadius/1000) >= 0) {
+        		var div = Math.floor(baseRadius/1000);
+    		} else {
+        		var div = 1;
+    		}
+  			return ($.distanceFromCurrent(clat, clng, item.latitude, item.longitude) < div);
+		});
+		
+		// Clear all markers
+		$('#map_canvas').gmap('clear', 'markers');
+		//alert(JSON.stringify(mData));
+		
+		$.each( mData, function(i, marker) {
+				
+			$('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(marker.latitude, marker.longitude), 'bounds':false } ).click(function() {
+				$('#map_canvas').gmap('openInfoWindow', { 'content': marker.content }, this);
+			});
+		});
+		// 위치 좌표 오브젝트 생성
+		//var latLng = new google.maps.LatLng(clat, clng);
+		
+		//$('#map_canvas').gmap({ 'center': latLng});
+		//
+	} );
+
+});
+
+//$.mobile.ajaxEnabled = false;
+
+
+</script>
+
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+
+#content {
+    padding: 0;
+    position : absolute !important; 
+    top : 40px !important;  
+    right : 0; 
+    bottom : 40px !important;  
+    left : 0 !important;     
+}
+
+</style>
+</head>
+
+<body>
+<div data-role="page" id="index">
+	<div data-role="header" data-theme="b" data-position="inline">
+    	<a href="#" data-rel="back" data-icon="arrow-l" data-theme="g">Back</a>
+		<h1>booHeart 매장 찾기</h1>
+        <a href="#list" data-icon="check" data-theme="g">리스트</a>
+	</div>
+
+    <div data-role="content" id="content">
+            <div id="map_canvas" style="width:100%; height:100%;"></div>
+    </div>
+
+    <div data-theme="b" data-role="footer" data-position="fixed">
+        <h3>
+            Footer
+        </h3>
+    </div>
+</div>
+<div data-role="page" id="list">
+	<div data-role="header" data-theme="b" data-position="inline">
+    	<a href="#" data-rel="back" data-icon="arrow-l" data-theme="g">Back</a>
+		<h1>가까운 매장 검색</h1>
+        <a href="#index" data-icon="search" data-theme="g">지도찾기</a>
+	</div>
+
+    <div data-role="content" id="content">
+            <div id="map_canvas" style="width:100%; height:100%;"></div>
+    </div>
+
+    <div data-theme="b" data-role="footer" data-position="fixed">
+        <h3>
+            Footer
+        </h3>
+    </div>
+</div>
+
+</body>
+</html>

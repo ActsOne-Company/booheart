@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booHeart</title>
+<link rel="stylesheet" href="css/booheart-theme.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile.structure-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/en_UK/all.js', function(){
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '392391277518643',
+        channelUrl: '//dev.actsone.co.kr/booheart/channel.html',
+		status     : true,                                 // Check Facebook Login status
+        xfbml      : true,
+		cookie: true
+      });       
+      $('#loginbutton,#feedbutton').removeAttr('disabled');
+      FB.getLoginStatus(checkLoginStatus);
+    };
+  });
+});
+
+function authUser() {
+        FB.login(checkLoginStatus, {scope:'publish_stream, email, user_birthday'});
+      }
+      
+      // Check the result of the user status and display login button if necessary
+function checkLoginStatus(response) {
+        if(response && response.status == 'connected') {
+          alert('User is authorized');
+          
+          // Hide the login button
+          document.getElementById('loginButton').style.display = 'none';
+          
+          // Now Personalize the User Experience
+          console.log('Access Token: ' + response.authResponse.accessToken);
+        } else if (response.status === 'not_authorized') {
+          alert('User is not authorized');
+          
+          // Display the login button
+          document.getElementById('loginButton').style.display = 'block';
+        } else {
+			// the user isn't logged in to Facebook.
+			alert('User is not logged in to Facebook');
+		}
+}
+</script>
+<body>
+    <div id="fb-root"></div>
+	<div class="fb-login-button" data-show-faces="false" data-width="400" data-max-rows="2">Facebook Login </div>
+	<input id="loginButton" type="button" value="Login!" onclick="authUser();" />
+</body>
+</html>

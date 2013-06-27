@@ -1,0 +1,79 @@
+/**
+ * Appcropolis Templates
+ * @copy Appcropolis LLC (c) 2012. All rights reserved.
+ * @author Sergio Marin (support@appcropolis.com)
+ * @date 2013-04-01
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
+ *
+ * License and legal information: 
+ *
+ * http://appcropolis.com/license
+ * http://appcropolis.com/terms-of-service
+ * http://appcropolis.com/privacy
+ *
+ */
+
+@font-face {
+  font-family: 'icons-set-a';
+  src: url("font/icons-set-a.eot?78048809");
+  src: url("font/icons-set-a.eot?78048809#iefix") format('embedded-opentype'), url("font/icons-set-a.woff?78048809") format('woff'), url("font/icons-set-a.ttf?78048809") format('truetype'), url("font/icons-set-a.svg?78048809#fontello") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?78048809#fontello') format('svg');
+  }
+}
+*/
+
+[class^="ui-icon-"]:before,
+[class*=" ui-icon-"]:before {
+  font-family: 'icons-set-a';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+/* opacity .8 */
+/* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+/* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+/* Animation center compensation - magrins should be symmetric */
+/* remove if not needed */
+  margin-left: 0.2em;
+/* you can be more comfortable with increased icons size */
+/* font-size: 120%; */
+/* Uncomment for 3D effect */
+/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+
+	font-size: 20px;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+}
+
+.ui-icon-doc:before { content: '\e018'; } /* 'î€˜' */
+.ui-icon-export:before { content: '\e715'; } /* 'îœ•' */
+.ui-icon-basket:before { content: '\e73d'; } /* 'îœ½' */
+.ui-icon-th-list:before { content: '\f009'; } /* 'ï€‰' */
+.ui-icon-rss:before { content: '\f09e'; } /* 'ï‚ž' */
+
+	
