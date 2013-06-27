@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=320; user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>booHeart</title>
+<link rel="stylesheet" href="css/booheart-theme.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile.structure-1.3.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="barcodescanner.js"></script>
+	<script type="text/javascript" charset="utf-8">
+      
+        var onDeviceReady = function() {
+            document.getElementById("devready").innerHTML = "OnDeviceReady fired.";
+        };
+
+        function init() {
+            document.addEventListener("deviceready", onDeviceReady, true);
+        }   
+		
+		$(document).ready(function(e) {
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+   		scanner.scan(
+      		function (result) {
+          		alert("We got a barcode\n" +
+                	"Result: " + result.text + "\n" +
+                	"Format: " + result.format + "\n" +
+                	"Cancelled: " + result.cancelled);
+      		}, 
+      		function (error) {
+          		alert("Scanning failed: " + error);
+      		}
+         );
+		});
+</script>  
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+<div data-role="page" data-theme="b" id="page1">
+	<div data-role="header" data-theme="b" data-position="inline">
+		<h1>booHeart</h1>
+	</div>
+    <div data-role="content" data-theme="b">
+    </div>
+    <div data-theme="b" data-role="footer" data-position="fixed">
+        <div data-role="navbar" data-theme="e">
+        <ul>
+        <li><a href="map2.html">Map</a></li>
+        <li><a href="donation.html">Donation</a></li>
+        <li><a href="barcode.html">Barcode</a></li>
+        </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
